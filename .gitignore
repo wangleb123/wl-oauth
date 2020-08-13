@@ -17,6 +17,7 @@ target/
 .idea
 .mvn
 mvnw
+<<<<<<< HEAD
 mvnw.cmd
 *.iws
 *.iml
