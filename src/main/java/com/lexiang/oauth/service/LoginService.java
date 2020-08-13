@@ -88,7 +88,7 @@ public class LoginService {
      * @param data 存储的用户数据
      * @return
      */
-    public String login(Map<String, Object> clams ,Integer userKey,Object data){
+    public String login(Map<String, Object> clams ,String userKey,Object data){
         init(loginProperties);
         String serviceKey = loginProperties.getServiceKey();
         long redisTtlMillis = loginProperties.getRedisTtlMillis();
