@@ -4,7 +4,7 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Data
-@ConfigurationProperties(prefix = "wl-oauth")
+@ConfigurationProperties(prefix = "oauth")
 public class LoginProperties {
 
     //是否需要登录

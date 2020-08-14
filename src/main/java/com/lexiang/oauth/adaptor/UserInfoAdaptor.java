@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
 
 public interface UserInfoAdaptor {
 
-   void  userHandler(HttpServletRequest request, Method method, CheckUser checkUser, WLUser loginVO);
+   void  userHandler(HttpServletRequest request, Method method, CheckUser checkUser, Object loginVO);
 
 }
 

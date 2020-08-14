@@ -1,59 +1,59 @@
 {
   "groups": [
     {
-      "name": "wl-oauth",
+      "name": "oauth",
       "type": "com.lexiang.oauth.properties.LoginProperties",
       "sourceType": "com.lexiang.oauth.properties.LoginProperties"
     }
   ],
   "properties": [
     {
-      "name": "wl-oauth.enable-login",
+      "name": "oauth.enable-login",
       "type": "java.lang.Boolean",
       "sourceType": "com.lexiang.oauth.properties.LoginProperties",
       "defaultValue": false
     },
     {
-      "name": "wl-oauth.enable-s-s-o",
+      "name": "oauth.enable-s-s-o",
       "type": "java.lang.Boolean",
       "sourceType": "com.lexiang.oauth.properties.LoginProperties",
       "defaultValue": false
     },
     {
-      "name": "wl-oauth.j-wt-ttl-millis",
+      "name": "oauth.j-wt-ttl-millis",
       "type": "java.lang.Long",
       "sourceType": "com.lexiang.oauth.properties.LoginProperties",
       "defaultValue": 60000
     },
     {
-      "name": "wl-oauth.jwt-key",
+      "name": "oauth.jwt-key",
       "type": "java.lang.String",
       "sourceType": "com.lexiang.oauth.properties.LoginProperties",
       "defaultValue": "yun-ye"
     },
     {
-      "name": "wl-oauth.jwt-private-key-path",
+      "name": "oauth.jwt-private-key-path",
       "type": "java.lang.String",
       "sourceType": "com.lexiang.oauth.properties.LoginProperties"
     },
     {
-      "name": "wl-oauth.jwt-public-key-path",
+      "name": "oauth.jwt-public-key-path",
       "type": "java.lang.String",
       "sourceType": "com.lexiang.oauth.properties.LoginProperties"
     },
     {
-      "name": "wl-oauth.phone-code-key",
+      "name": "oauth.phone-code-key",
       "type": "java.lang.String",
       "sourceType": "com.lexiang.oauth.properties.LoginProperties"
     },
     {
-      "name": "wl-oauth.redis-ttl-millis",
+      "name": "oauth.redis-ttl-millis",
       "type": "java.lang.Long",
       "sourceType": "com.lexiang.oauth.properties.LoginProperties",
       "defaultValue": 86400000
     },
     {
-      "name": "wl-oauth.service-key",
+      "name": "oauth.service-key",
       "type": "java.lang.String",
       "sourceType": "com.lexiang.oauth.properties.LoginProperties"
     }

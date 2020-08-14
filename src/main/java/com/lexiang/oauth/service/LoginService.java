@@ -6,11 +6,14 @@ import com.google.common.collect.Sets;
 import com.lexiang.utils.enums.CodeEnum;
 import com.lexiang.utils.exception.BusinessException;
 import com.lexiang.utils.utils.AssetUtils;
+import com.lexiang.utils.utils.JsonUtils;
 import com.lexiang.utils.utils.TokenUtils;
 import com.lexiang.oauth.WLUser;
 import com.lexiang.oauth.properties.LoginProperties;
 import com.lexiang.oauth.utils.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -28,8 +31,11 @@ public class LoginService {
 
     private final LoginProperties loginProperties;
 
+    @Autowired
+    private ApplicationContext applicationContext;
+
     //threadLocal保存当前用户信息
-    private static final ThreadLocal<WLUser>  userLocal = new ThreadLocal<>();
+    private static final ThreadLocal<Object>  userLocal = new ThreadLocal<>();
 
     public LoginService(JwtUtils jwtUtils, RedisService redisService, LoginProperties loginProperties){
         this.redisService = redisService;
@@ -69,14 +75,16 @@ public class LoginService {
                 throw new BusinessException(CodeEnum.USER_NOT_LOGIN.getCode(),CodeEnum.USER_NOT_LOGIN.getName());
             }else {
                 Object redisKey = keys.toArray()[0];
-                WLUser WLUser = JSON.parseObject(JSON.toJSONString(redisService.get(redisKey.toString())), WLUser.class);
-                userLocal.set(WLUser);
+
+                String s = JSON.toJSONString(redisService.get(redisKey.toString()));
+                userLocal.set(s);
             }
         }
     }
 
 
-    public static WLUser getUser() {
+    public static Object getUser() {
+
         return userLocal.get();
     }
 
@@ -97,7 +105,7 @@ public class LoginService {
             if(serviceKey == null || userKey == null){
                 throw new BusinessException(405,"开启单点登录需配置serviceKey(yml配置)和用户唯一标示(登录时传入)");
             }
-            if(isLogin != null){
+            if(isLogin.size() != 0){
                 redisService.delete(isLogin);
             }
         }

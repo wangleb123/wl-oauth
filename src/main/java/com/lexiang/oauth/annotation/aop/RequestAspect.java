@@ -1,12 +1,16 @@
 package com.lexiang.oauth.annotation.aop;
 
 
+import com.lexiang.oauth.WLUser;
 import com.lexiang.oauth.adaptor.UserInfoAdaptor;
 import com.lexiang.oauth.annotation.CheckUser;
 import com.lexiang.oauth.service.LoginService;
+import com.lexiang.utils.utils.JsonUtils;
 import com.lexiang.utils.utils.RequestUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -41,8 +45,8 @@ public class RequestAspect {
      *
      * @param joinPoint 连接点，就是被拦截点
      */
-    @Before(value = "@annotation(com.lexiang.oauth.annotation.CheckUser)")
-    public void doBefore(JoinPoint joinPoint) {
+    @Around(value = "@annotation(com.lexiang.oauth.annotation.CheckUser)")
+    public Object doBefore(ProceedingJoinPoint joinPoint) throws Throwable {
         HttpServletRequest request = RequestUtils.getRequest();
         UserInfoAdaptor bean = applicationContext.getBean(UserInfoAdaptor.class);
         //URL：根据请求对象拿到访问的地址
@@ -67,6 +71,13 @@ public class RequestAspect {
            loginService.checkToken();
         }
         loginService.setUser();
-        bean.userHandler(request,method,annotation, LoginService.getUser());
+        Object[] args = joinPoint.getArgs();
+        for (Object arg : args) {
+            if(arg instanceof WLUser){
+                arg = JsonUtils.ObjectToBean(LoginService.getUser(), arg.getClass());
+                bean.userHandler(request,method,annotation, arg);
+            }
+        }
+        return joinPoint.proceed(args);
     }
 }

@@ -1,3 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.lexiang.oauth.DefaultAutoConfiguration
+com.lexiang.oauth.DefaultAutoConfiguration,\
+com.lexiang.oauth.annotation.aop.RequestAspect,\
+com.lexiang.oauth.RedisAutoConfiguration
 
